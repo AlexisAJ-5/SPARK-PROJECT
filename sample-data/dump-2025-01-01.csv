@@ -1,0 +1,11 @@
+id;id_fantoir;numero;rep;nom_voie;code_postal;code_insee;nom_commune;code_insee_ancienne_commune;nom_ancienne_commune;x;y;lon;lat;type_position;alias;nom_ld;libelle_acheminement;nom_afnor;source_position;source_nom_voie;certification_commune;cad_parcelles
+75056_0002_00001;750560002;1;;Rue de Rivoli;75001;75101;Paris 1er Arrondissement;;;651234.56;6862345.67;2.361234;48.861234;entrée;;;;;Rue de Rivoli;cadastre;commune;AB0123
+75056_0002_00002;750560002;2;;Rue de Rivoli;75001;75101;Paris 1er Arrondissement;;;651235.56;6862346.67;2.361235;48.861235;entrée;;;;;Rue de Rivoli;cadastre;commune;AB0124
+75056_0002_00003;750560002;3;;Rue de Rivoli;75001;75101;Paris 1er Arrondissement;;;651236.56;6862347.67;2.361236;48.861236;entrée;;;;;Rue de Rivoli;cadastre;commune;AB0125
+75056_0003_00001;750560003;1;;Avenue des Champs-Élysées;75008;75108;Paris 8e Arrondissement;;;651300.56;6862400.67;2.301234;48.869234;entrée;;;;;Avenue des Champs-Elysees;cadastre;commune;CD0123
+75056_0003_00002;750560003;2;;Avenue des Champs-Élysées;75008;75108;Paris 8e Arrondissement;;;651301.56;6862401.67;2.301235;48.869235;entrée;;;;;Avenue des Champs-Elysees;cadastre;commune;CD0124
+93001_0001_00001;930010001;1;;Rue Jean Jaurès;93100;93001;Montreuil;;;654234.56;6866345.67;2.441234;48.861234;entrée;;;;;Rue Jean Jaures;cadastre;commune;EF0123
+93001_0001_00002;930010001;2;;Rue Jean Jaurès;93100;93001;Montreuil;;;654235.56;6866346.67;2.441235;48.861235;entrée;;;;;Rue Jean Jaures;cadastre;commune;EF0124
+93001_0001_00003;930010001;3;;Rue Jean Jaurès;93100;93001;Montreuil;;;654236.56;6866347.67;2.441236;48.861236;entrée;;;;;Rue Jean Jaures;cadastre;commune;EF0125
+69001_0001_00001;690010001;1;;Rue de la République;69001;69381;Lyon 1er Arrondissement;;;843234.56;6519345.67;4.831234;45.761234;entrée;;;;;Rue de la Republique;cadastre;commune;GH0123
+69001_0001_00002;690010001;2;;Rue de la République;69001;69381;Lyon 1er Arrondissement;;;843235.56;6519346.67;4.831235;45.761235;entrée;;;;;Rue de la Republique;cadastre;commune;GH0124

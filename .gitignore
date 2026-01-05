@@ -25,11 +25,13 @@ metastore_db/
 derby.log
 *.log
 
-# Test data and results
+# Test data and results (keep sample-data for demos)
 test-data/
 bal.db/
 /tmp/
 *.parquet
+metastore_db/
+spark-warehouse/
 
 # OS
 .DS_Store
