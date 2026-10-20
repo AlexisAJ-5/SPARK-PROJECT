@@ -1,100 +1,57 @@
 # SPARK BAL Addresses Project
 
-An automated Spark-based solution for incremental storage of French BAL (Base Adresse Locale) addresses with long-term retention (30+ years).
+An automated Apache Spark solution for the incremental storage of the French national address base
+(BAL, Base Adresse Locale), with long-term retention of 30+ years.
 
-## 🚀 Quick Start for Beginners
+## Project overview
 
-**NEW TO THIS PROJECT? Start here:**
+The project processes the French addresses dataset from
+[adresse.data.gouv.fr](https://adresse.data.gouv.fr/data/ban/adresses/latest/csv-bal/adresses-france.csv.gz)
+(~1.4 GB compressed CSV) and stores only the incremental changes each day, which keeps long-term
+storage small.
 
-1. **QUICKSTART.md** - Step-by-step instructions with screenshots guide
-2. **BEGINNERS_GUIDE.md** - Detailed installation and setup for Windows
-3. **PROJECT_SUMMARY.md** - Technical details and algorithms
+### Storage strategy
 
-## Project Overview
-
-This project processes the French addresses dataset from https://adresse.data.gouv.fr/data/ban/adresses/latest/csv-bal/adresses-france.csv.gz (~1.4GB compressed CSV) and stores only incremental changes daily, making it efficient for long-term storage.
-
-### Storage Strategy
-- Instead of storing ~2GB daily dumps (which would be 21 PB over 30 years)
-- We store only INSERT/UPDATE/DELETE differences each day
-- Data is stored in Parquet format in a Hive-partitioned table
-- Latest snapshot is maintained separately for quick access
+- Storing a full ~2 GB dump every day would take about **22 TB over 30 years**.
+- Instead, we store only the daily **INSERT / UPDATE / DELETE** differences.
+- Data is stored as **Parquet** in a **Hive-partitioned** table (one partition per day).
+- The latest snapshot is kept separately for fast access.
 
 ## Prerequisites
 
 - Java 8 or higher
 - Apache Maven 3.6+
-- Apache Spark 3.3.0 (installed and `spark-submit` in PATH)
+- Apache Spark 3.3.0 (`spark-submit` in PATH)
 - Bash shell (Linux/Mac) or Git Bash/WSL (Windows)
 
-## Building the Project
+## Build
 
 ```bash
 mvn clean install
 ```
 
-This will create `target/spark-bal-addresses-1.0-SNAPSHOT.jar`
+This creates `target/spark-bal-addresses-1.0-SNAPSHOT.jar`.
 
-## Features & Shell Scripts
+## Features
 
-### 1. Daily File Integration
-```bash
-./run_daily_file_integration.sh <date> <csvFile>
-```
+| Feature | Command | Java class |
+|---|---|---|
+| Daily file integration | `./run_daily_file_integration.sh <date> <csvFile>` | `DailyFileIntegration` |
+| Daily report | `./run_report.sh` | `DailyReport` |
+| Recompute the dump at any past date | `./recompute_and_extract_dump_at_date.sh <date> <outputDir>` | `RecomputeDump` |
+| Compute the diff between two datasets | `./compute_diff_between_files.sh <parquetDir1> <parquetDir2>` | `ComputeDiff` |
 
-### 2. Daily Report
-```bash
-./run_report.sh
-```
+`SparkMain` is the main entry point; the classes live in `src/main/java/fr/esilv/`.
 
-### 3. Recompute Dump at Date
-```bash
-./recompute_and_extract_dump_at_date.sh <date> <outputDir>
-```
-
-### 4. Compute Diff Between Files
-```bash
-./compute_diff_between_files.sh <parquetDir1> <parquetDir2>
-```
-
-## Quick Test
-
-Run the simple test with sample data:
+## Quick test
 
 ```bash
-./simple_test.sh
+./simple_test.sh          # 3 simulated days on the sample data
+./test_integration.sh     # 50 simulated days
+./prepare_test_data.sh    # generates more sample data
 ```
 
-## Documentation
-
-- **QUICKSTART.md** - Get started in 5 minutes
-- **BEGINNERS_GUIDE.md** - Complete installation and usage guide
-- **PROJECT_SUMMARY.md** - Technical architecture and algorithms
-
-## Project Structure
-
-```
-SPARK-PROJECT/
-├── pom.xml                                    # Maven build configuration
-├── src/main/java/fr/esilv/
-│   ├── SparkMain.java                         # Main entry point
-│   ├── DailyFileIntegration.java              # Feature 1: Daily integration
-│   ├── DailyReport.java                       # Feature 2: Statistics report
-│   ├── RecomputeDump.java                     # Feature 3: Recompute dump at date
-│   └── ComputeDiff.java                       # Feature 4: Compare datasets
-├── run_daily_file_integration.sh              # Shell script for daily integration
-├── run_report.sh                              # Shell script for report
-├── recompute_and_extract_dump_at_date.sh      # Shell script for recomputing dumps
-├── compute_diff_between_files.sh              # Shell script for diff computation
-├── test_integration.sh                        # Integration test script (50 days)
-├── simple_test.sh                             # Quick test (3 days)
-├── prepare_test_data.sh                       # Test data generator
-└── sample-data/                               # Sample CSV files for testing
-```
-
-## Expected Output Structure
-
-After running the integration:
+## Expected output structure
 
 ```
 bal.db/
@@ -108,11 +65,11 @@ bal.db/
     └── part-*.parquet
 ```
 
-## License
+## Documentation
 
-Educational project for ESILV Big Data course.
+- [QUICKSTART.md](QUICKSTART.md): step-by-step setup
+- [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md): technical architecture and algorithms
 
-## Author
+## Context
 
-Spark BAL Addresses Project - 2025
-
+Educational project for the ESILV Big Data course (2025), by Alexis Abou Jaoude.
